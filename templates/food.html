@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block food %}
+ {{ super() }}
+<div class="food">
+    <form action="/" , method="post">
+    {% for select in range(3) %}
+        <select name="food{{ select }}">
+            {% for food in foods %}
+            <option value="{{ food }}">{{ food }}</option>
+            {% endfor %}
+        </select>
+    {% endfor %}
+    <input type="submit" , value="Submit foods" />
+    </form>
+</div>
+
+{% endblock food %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        select {
+            text-align: center;
+        }
+    </style>
+
+    {% block title %}
+    <title>Cook App</title>
+    {% endblock title %}
+
+</head>
+
+<body>
+    {% block content %}
+
+        {% block header %}
+        <h1>The app helps you to choose todays dinner!</h1>
+        {% endblock header %}
+
+    
+        <h3>Choose cuisine you want to cook:</h3>
+        <div class="cuisine">
+            <form action="/" , method="get"> 
+                <select name="cuisine">
+                    {% for cuisine in cuisines_list %}
+                    <option value="{{ cuisine }}">{{ cuisine }}</option>
+                    {% endfor %}
+                </select>
+        
+                <input type="submit" , value="Submit_cuisine" />
+          
+            </form>
+        </div>
+   
+
+  {% block food %}
+            {% endblock food %}
+ 
+
+            {% block recipe_instructions %}
+            {% endblock recipe_instructions %}
+
+    {% endblock content %}
+</body>
+
+</html>

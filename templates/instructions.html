@@ -1,0 +1,20 @@
+{% extends 'food.html' %}
+
+
+{% block recipe_instructions %}
+<h1>{{ course_name }}</h1>
+<h3>Ingredients:</h3>
+<ul>
+    {% for ingridient in ingredients %}
+    <li>{{ ingridient }}</li>
+    {% endfor %}    
+</ul>
+<h3>Instructions:</h3>
+<ol>
+    {% for instruction in instructions %}
+    <li>{{ instruction }}</li>
+    {% endfor %}
+</ol>
+
+
+{% endblock recipe_instructions %}
