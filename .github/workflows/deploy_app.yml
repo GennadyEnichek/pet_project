@@ -1,9 +1,7 @@
 # The action creates structure from terraform file and deploys the pecipes application.
 name: deploy_app
 # action trigger
-on: 
-  commit_comment:
-    "run"
+on:
   push:
     branches: 
       - master
