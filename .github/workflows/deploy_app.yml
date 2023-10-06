@@ -2,6 +2,7 @@
 name: deploy_app
 # action trigger
 on: 
+  commit_comment:
   push:
     branches: 
       - master
@@ -22,7 +23,7 @@ jobs:
              
       # Git action script what clones the repository on runer.
       - name: Clone repo
-        run: actions/checkout@v3    
+        uses: actions/checkout@v3    
 
       - name: List folder and move to terraform folder
         run: ls -la
