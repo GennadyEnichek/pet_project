@@ -3,6 +3,7 @@ name: deploy_app
 # action trigger
 on: 
   commit_comment:
+    "run"
   push:
     branches: 
       - master
