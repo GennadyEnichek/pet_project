@@ -14,13 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Check programs
+      - name: Check aws version
         run: aws --version
-             terrform --version
+        
+      - name: Check terraform version
+        run: terrform --version
              
-        # Git action script what clones the repository on runer.
+      # Git action script what clones the repository on runer.
       - name: Clone repo
-        run: aws --actions/checkout@v1    
+        run: actions/checkout@v1    
 
       - name: List folder and move to terraform folder
         run: ls -la
