@@ -19,6 +19,18 @@ jobs:
           aws --version
           terraform --version
           git --version
+          
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-west-1
+          
+      - name: Check AWS configuration
+        run: |
+          cd .aws/
+          ls -al
              
       # Git action script what clones the repository on runer.
       - name: Clone repo
