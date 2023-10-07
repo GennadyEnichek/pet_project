@@ -10,54 +10,37 @@ on:
 jobs:
   # jobs name
   build_infrastructure:
-  
+    # runner OS
     runs-on: ubuntu-latest
     
     steps:
-      - name: Check programm version
-        run: |
-          aws --version
-          terraform --version
-          git --version
-          
+ 
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-west-1
-          
-      - name: Check AWS configuration
-        run: |
-          ls -la
-          aws ec2 describe-instances --query "Reservations[].Instances[].Tags[?Key=='Name'].Value" --output text
-           
-      # Git action script what clones the repository on runer.
-      - name: Clone repo
+             
+      - name: Clone repo into runner
         uses: actions/checkout@v3   
-
-      # to save file back to GitHab
-      - name: Save file to GitHab
-        run: |
-          touch test_file.txt
-          ls -la
-          git config --local user.email "actions@actions.com"
-          git config --local user.name "actions"
-          git add *
-          git commit -m 'test comment'
-          
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.TOKEN }}
 
       - name: Launch terraform
         run: |
           cd ./terraform
-          ls -la
           terraform init
           terraform plan
-       #   terraform apply -auto-approve
+          terraform apply -auto-approve
 
-
+      - name: Save terraform state file to git repo
+        run: |
+          git config --local user.email "actions@actions.com"
+          git config --local user.name "actions"
+          git add *
+          git commit -m 'last terraform state file version'
+          
+      - name: Push terraform state file to GitHub repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
     
