@@ -49,7 +49,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secret.TOKEN }}
+          github_token: ${{ secrets.TOKEN }}
 
       - name: Launch terraform
         run: |
