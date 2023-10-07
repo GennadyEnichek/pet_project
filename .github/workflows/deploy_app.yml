@@ -43,7 +43,8 @@ jobs:
           ls -la
           git config --local user.email "actions@actions.com"
           git config --local user.name "actions"
-          git commit -a -m 'test comment'
+          git add *
+          git commit -m 'test comment'
           git push
 
       - name: Launch terraform
