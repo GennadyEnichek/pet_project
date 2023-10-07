@@ -28,9 +28,9 @@ jobs:
           aws-region: us-west-1
           
       - name: Check AWS configuration
-        run: |
+        run: 
         #  cd .aws/
-          ls -al
+       #   ls -al
           aws ec2 describe-instances --filters Name=instance-type,Values= t2.micro
              
       # Git action script what clones the repository on runer.
