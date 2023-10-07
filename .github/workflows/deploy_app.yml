@@ -47,7 +47,7 @@ jobs:
           git commit -m 'test comment'
           
       - name: Push changes
-        uses: ad-m/github-push-action@main
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.TOKEN }}
 
