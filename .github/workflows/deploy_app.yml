@@ -45,8 +45,11 @@ jobs:
           git config --local user.name "actions"
           git add *
           git commit -m 'test comment'
+          
       - name: Push changes
         uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secret.TOKEN }}
 
       - name: Launch terraform
         run: |
