@@ -31,6 +31,7 @@ jobs:
         run: 
         #  cd .aws/
           ls -al
+          aws ec2 describe-instances --filters Name=instance-type,Values= t2.micro
              
       # Git action script what clones the repository on runer.
       - name: Clone repo
