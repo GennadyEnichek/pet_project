@@ -29,9 +29,10 @@ jobs:
           
       - name: Check AWS configuration
         run: 
+          aws ec2 describe-instances --query "Reservations[].Instances[].Tags[?Key=='Name'].Value" --output text
         #  cd .aws/
        #   ls -al
-          aws ec2 describe-instances --filters Name=instance-type,Values= t2.micro
+        #  aws ec2 describe-instances --filters Name=instance-type,Values= t2.micro
              
       # Git action script what clones the repository on runer.
       - name: Clone repo
