@@ -38,7 +38,7 @@ jobs:
 
       # to save file back to GitHab
       - name: Save file to GitHab
-        run:
+        run: |
           touch test_file.txt
           git add *
           git commit -m 'test comment'
