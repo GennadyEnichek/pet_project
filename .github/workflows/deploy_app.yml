@@ -40,8 +40,10 @@ jobs:
       - name: Save file to GitHab
         run: |
           touch test_file.txt
-          git add *
-          git commit -m 'test comment'
+          ls -la
+          git config --local user.email "actions@actions.com"
+          git config --local user.name "actions"
+          git commit -a -m 'test comment'
           git push
 
       - name: Launch terraform
