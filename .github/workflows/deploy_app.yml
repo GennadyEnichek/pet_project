@@ -2,9 +2,9 @@
 name: deploy_app
 # action trigger
 on:
-  push:
-    branches: 
-      - main
+#  push:
+#    branches: 
+#      - main
   workflow_dispatch:
 
 jobs:
