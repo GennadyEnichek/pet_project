@@ -40,10 +40,12 @@ jobs:
 
       - name: List folder and move to terraform folder
         run: |
-          ls -la
           cd ./terraform
           ls -la
-            
+        
+      - name: Launch terraform
+        run: |
+          terraform init
+          terraform plan
 
-    
     
