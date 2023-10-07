@@ -28,15 +28,21 @@ jobs:
           aws-region: us-west-1
           
       - name: Check AWS configuration
-        run: 
+        run: |
+          ls -la
           aws ec2 describe-instances --query "Reservations[].Instances[].Tags[?Key=='Name'].Value" --output text
-        #  cd .aws/
-       #   ls -al
-        #  aws ec2 describe-instances --filters Name=instance-type,Values= t2.micro
-             
+           
       # Git action script what clones the repository on runer.
       - name: Clone repo
-        uses: actions/checkout@v3    
+        uses: actions/checkout@v3   
+
+      # to save file back to GitHab
+      - name: Save file to GitHab
+        run:
+          touch test_file.txt
+          git add *
+          git commit -m 'test comment'
+          git push
 
       - name: Launch terraform
         run: |
@@ -44,7 +50,7 @@ jobs:
           ls -la
           terraform init
           terraform plan
-          terraform apply -auto-approve
+       #   terraform apply -auto-approve
 
 
     
