@@ -38,15 +38,12 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3    
 
-      - name: List folder and move to terraform folder
+      - name: Launch terraform
         run: |
           cd ./terraform
           ls -la
-        
-      - name: Launch terraform
-        run: |
-          ls -la
           terraform init
           terraform plan
+
 
     
