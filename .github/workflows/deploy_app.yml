@@ -45,6 +45,7 @@ jobs:
         
       - name: Launch terraform
         run: |
+          ls -la
           terraform init
           terraform plan
 
