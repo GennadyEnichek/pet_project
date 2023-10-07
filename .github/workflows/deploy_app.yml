@@ -18,6 +18,7 @@ jobs:
         run: |
           aws --version
           terraform --version
+          git --version
              
       # Git action script what clones the repository on runer.
       - name: Clone repo
