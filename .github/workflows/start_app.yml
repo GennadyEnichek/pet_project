@@ -23,7 +23,9 @@ jobs:
       - name: Clone repo into runner
         uses: actions/checkout@v3
 
-  #    - name: Try variable
+      - name: Try variable
+        env:
+          MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"}}
   #     run: |
    #       bucnam = $(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
     #      echo "${{bucnam}}"
