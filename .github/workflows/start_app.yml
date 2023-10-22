@@ -34,7 +34,7 @@ jobs:
         uses: haya14busa/action-cond@v1
         id: condval
         with:
-          cond: ${{ env.TEST == 'pull_request' }}
+          cond: ${{ bucnam == 'pull_request' }}
           if_true: "value for pull request event"
           if_false: "value for non pull request event"
       - name: Use conditional value
