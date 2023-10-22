@@ -1,8 +1,7 @@
 name: start_app
 
 env:
-  S3_BUCKET_NAME: test-bucket-gj-190
-  TEST: "pull_request"
+  S3_BUCKET_NAME: recipe-s3-gj-481
 
 on:
   workflow_dispatch:
@@ -23,39 +22,25 @@ jobs:
       - name: Clone repo into runner
         uses: actions/checkout@v3
 
-      - name: Try variable
-     #   env:
-      #    MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}"
+      - name: Change directory to /terraform
         run: |
-          bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}")
-          echo "$bucnam"
-
+          cd ~/pet_project/terraform/
+          echo "Working directory:"
+          pwd
           
-      - name: Try if bash
+      - name: Terraform init stage
+        run: |
+          terraforn init
+          ls -la
+          
+      - name: Check does s3 bucket created. If yes download terrafor state file, if no creates bucket
         run: 
           if aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}";
           then
-            echo "Yes";
+            echo "Dwnload state file";
             exit 0;
+          else
+            echo "Create s3";
+            exit 1;
           fi
         continue-on-error: true
-
-
-      - name: Try if else
-        uses: haya14busa/action-cond@v1
-        id: condval
-        with:
-          cond: ${{ env.TEST == 'pull_request' }}
-          if_true: "value for pull request event"
-          if_false: "value for non pull request event"
-      - name: Use conditional value
-        run: echo "${{ steps.condval.outputs.value }}"
-
-    #  - name: Check does exist S3 Bucket with the name
-   #     env:
-    #      BUCKET_NAME: ${{ aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190" }}
-        
-   #     if: aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"
-    #    run: echo "S3 bucket exists."
-
-
