@@ -29,7 +29,7 @@ mysql --user="root" --password="password" cook_book < /home/ubuntu/pet_project/d
 echo "Create user for connection with app" >> mysql_init_log.txt
 sudo  mysql --user="root" --password="password" <<-eof
 CREATE USER 'user1'@'172.31.200.109' IDENTIFIED BY 'password1';
-GRANT ALL PRIVILEGES ON cook_book.* TO 'user1'@'172.31.200.109';
+GRANT ALL PRIVILEGES ON cook_book.* TO 'user1'@'172.31.200.109' IDENTIFIED BY 'password1';
 FLUSH PRIVILEGES;
 exit
 eof
