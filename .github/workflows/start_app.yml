@@ -33,7 +33,7 @@ jobs:
           if aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}";
           then
             echo "Dwnload state file";
-            aws s3api get-object --bucket ${{env.S3_BUCKET_NAME}} --key recipe_tf/terraform.tfstate
+            aws s3api get-object --bucket {{env.S3_BUCKET_NAME}} --key recipe_tf/terraform.tfstate terraform.tfstate;
             exit 0;
           else
             echo "Create s3 bucket";
@@ -47,5 +47,6 @@ jobs:
         continue-on-error: true
         
       - name: Check file
-        run: 
+        run: |
+          cd ./terraform
           ls -la
