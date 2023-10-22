@@ -24,11 +24,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Try variable
-        env:
-          MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"}}
+     #   env:
+      #    MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"}}
         run: |
           bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
-          echo "${{env.MY_VAR}}"
+          echo "$bucnam"
 
       - name: Try if else
         uses: haya14busa/action-cond@v1
