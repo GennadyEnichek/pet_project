@@ -10,6 +10,12 @@ variable "subnet_cidr" {
   default     = "172.31.200.0/24"
 }
 
+variable "internet_gateway" {
+  description = "Internet geatway for recipe subnet"
+  type        = string
+  default     = "igw-0261567907a479577"
+}
+
 variable "tags" {
   description = "Tags for routing module"
   type        = map(string)

@@ -3,3 +3,4 @@
 /db_tries
 /pictures
 /terraform/.terraform
+*.yaml
