@@ -23,10 +23,10 @@ jobs:
       - name: Clone repo into runner
         uses: actions/checkout@v3
 
-      - name: Try variable
-        run: |
-          bucnam = $(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
-          echo "${{bucnam}}"
+  #    - name: Try variable
+  #     run: |
+   #       bucnam = $(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
+    #      echo "${{bucnam}}"
 
       - name: Try if else
         uses: haya14busa/action-cond@v1
