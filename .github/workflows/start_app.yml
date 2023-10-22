@@ -35,8 +35,8 @@ jobs:
         run: 
           if aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190";
           then
-            echo "Yes"
-            exit 0
+            echo "Yes";
+            exit 0;
           fi
         continue-on-error: true
 
