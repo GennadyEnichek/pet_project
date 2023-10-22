@@ -2,7 +2,8 @@ name: start_app
 
 env:
   S3_BUCKET_NAME: test-bucket-gj-190
-  
+  TEST: "pull_request"
+
 on:
   workflow_dispatch:
 
@@ -20,12 +21,28 @@ jobs:
           aws-region: us-west-1
              
       - name: Clone repo into runner
-        uses: actions/checkout@v3  
+        uses: actions/checkout@v3
 
-      - name: Check does exist S3 Bucket with the name
+      - name: Try variable
+        run: |
+          bucnam = $(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
+          echo "${{bucnam}}"
+
+      - name: Try if else
+        uses: haya14busa/action-cond@v1
+        id: condval
+        with:
+          cond: ${{ env.TEST == 'pull_request' }}
+          if_true: "value for pull request event"
+          if_false: "value for non pull request event"
+      - name: Use conditional value
+        run: echo "${{ steps.condval.outputs.value }}"
+
+    #  - name: Check does exist S3 Bucket with the name
    #     env:
     #      BUCKET_NAME: ${{ aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190" }}
-        if: aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"
-        run: echo "S3 bucket exists."
+        
+   #     if: aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"
+    #    run: echo "S3 bucket exists."
 
 
