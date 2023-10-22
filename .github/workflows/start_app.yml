@@ -25,15 +25,15 @@ jobs:
 
       - name: Try variable
      #   env:
-      #    MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"}}
+      #    MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}"
         run: |
-          bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
+          bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}")
           echo "$bucnam"
 
           
       - name: Try if bash
         run: 
-          if aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190";
+          if aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{env.S3_BUCKET_NAME}}";
           then
             echo "Yes";
             exit 0;
