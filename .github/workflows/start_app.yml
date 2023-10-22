@@ -26,8 +26,8 @@ jobs:
       - name: Try variable
         env:
           MY_VAR: ${{aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"}}
-        run: 
-   #       bucnam = $(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
+        run: |
+          bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
           echo "${{env.MY_VAR}}"
 
       - name: Try if else
