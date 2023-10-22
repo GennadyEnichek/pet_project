@@ -33,10 +33,12 @@ jobs:
           
       - name: Try if bash
         run: 
-          if aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"
+          if aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190";
           then
             echo "Yes"
+            exit 0
           fi
+        continue-on-error: true
 
 
       - name: Try if else
