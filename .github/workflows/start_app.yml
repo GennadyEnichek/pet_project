@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  start_recipes_application:
+  create_app_ifrastructure:
     runs-on: ubuntu-latest
     
     steps:
@@ -46,7 +46,9 @@ jobs:
           fi
         continue-on-error: true
         
-      - name: Check file
+      - name: Launch terraform 
         run: |
           cd ./terraform
-          ls -la
+          terraform plan
+          terraform apply -auto-approve
+          
