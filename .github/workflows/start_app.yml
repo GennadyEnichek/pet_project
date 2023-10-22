@@ -22,20 +22,11 @@ jobs:
       - name: Clone repo into runner
         uses: actions/checkout@v3
 
-      - name: Check directory
-        run:
-          ls -la
 
-      - name: Change directory to /terraform
+      - name: Change directory to '/terraform' and initiate the directory
         run: |
           cd ./terraform
-          echo "Working directory:"
-          pwd
-          
-      - name: Terraform init stage
-        run: |
-          terraforn init
-          ls -la
+          terraform init
           
       - name: Check does s3 bucket created. If yes download terrafor state file, if no creates bucket
         run: 
