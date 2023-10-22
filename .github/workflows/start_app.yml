@@ -28,7 +28,7 @@ jobs:
 
       - name: Change directory to /terraform
         run: |
-          cd ~/terraform/
+          cd ./terraform
           echo "Working directory:"
           pwd
           
