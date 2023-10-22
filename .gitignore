@@ -3,4 +3,6 @@
 /db_tries
 /pictures
 /terraform/.terraform
-*.yaml
+*.tfstate
+*.backup
+*.hcl

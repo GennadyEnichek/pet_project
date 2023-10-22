@@ -2,33 +2,45 @@
 name: deploy_app
 # action trigger
 on:
-  push:
-    branches: 
-      - master
+#  push:
+#    branches: 
+#      - main
   workflow_dispatch:
 
 jobs:
   # jobs name
   build_infrastructure:
-  
+    # runner OS
     runs-on: ubuntu-latest
     
     steps:
-      - name: Check programm version
-        run: |
-          aws --version
-          terraform --version
+ 
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-west-1
              
-      # Git action script what clones the repository on runer.
-      - name: Clone repo
-        uses: actions/checkout@v3    
+      - name: Clone repo into runner
+        uses: actions/checkout@v3   
 
-      - name: List folder and move to terraform folder
-        run: 
-          ls -la
-        #  cd ./terraform
-        #  ls -la
-            
+      - name: Launch terraform
+        run: |
+          cd ./terraform
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
 
-    
+      - name: Save terraform state file to git repo
+        run: |
+          git config --local user.email "actions@actions.com"
+          git config --local user.name "actions"
+          git add *
+          git commit -m 'last terraform state file version'
+          
+      - name: Push terraform state file to GitHub repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
     
