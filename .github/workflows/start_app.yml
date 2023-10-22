@@ -22,6 +22,10 @@ jobs:
       - name: Clone repo into runner
         uses: actions/checkout@v3
 
+      - name: Check directory
+        run:
+          ls -la
+
       - name: Change directory to /terraform
         run: |
           cd ~/pet_project/terraform/
