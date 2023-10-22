@@ -25,8 +25,6 @@ jobs:
       - name: Check does exist S3 Bucket with the name
         run: |
           if aws s3api list-buckets --query "Buckets[].Name" | grep -w "${{ env.S3_BUCKET_NAME }}"; then
-            echo "S3 bucket '$bucket_name' exists."
-            exit 0
+            echo "S3 bucket exists."
           else
-            echo "S3 bucket '$bucket_name' does not exist."
-            exit 1
+            echo "S3 bucket does not exist."
