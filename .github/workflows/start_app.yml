@@ -29,9 +29,15 @@ jobs:
         run: |
           bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
           echo "$bucnam"
-          if $bucnam then
-            echo "$bucnam"
+
+          
+      - name: Try if bash
+        run: 
+          if aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"
+          then
+            echo "Yes"
           fi
+
 
       - name: Try if else
         uses: haya14busa/action-cond@v1
