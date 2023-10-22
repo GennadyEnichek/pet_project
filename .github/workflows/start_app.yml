@@ -23,9 +23,9 @@ jobs:
         uses: actions/checkout@v3  
 
       - name: Check does exist S3 Bucket with the name
-        env:
-          BUCKET_NAME: ${{ aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190" }}
-        if: $BUCKET_NAME == "test-bucket-gj-190"
+   #     env:
+    #      BUCKET_NAME: ${{ aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190" }}
+        if: aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190"
         run: echo "S3 bucket exists."
 
 
