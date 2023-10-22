@@ -29,12 +29,15 @@ jobs:
         run: |
           bucnam=$(aws s3api list-buckets --query "Buckets[].Name" | grep -w "test-bucket-gj-190")
           echo "$bucnam"
+          if $bucnam then
+            echo "$bucnam"
+          fi
 
       - name: Try if else
         uses: haya14busa/action-cond@v1
         id: condval
         with:
-          cond: ${{ $bucnam == 'pull_request' }}
+          cond: ${{ env.TEST == 'pull_request' }}
           if_true: "value for pull request event"
           if_false: "value for non pull request event"
       - name: Use conditional value
