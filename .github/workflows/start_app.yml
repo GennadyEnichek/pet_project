@@ -69,10 +69,6 @@ jobs:
       - name: Clone repo into runner
         uses: actions/checkout@v
           
-      - name: Get host public DNS address
-        run: |
-          public_dns=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesHost" Name=instance-state-name,Values=running  --query "Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicDnsName"  --output text)
-          echo "Host public DNS: ${{public_dns}}"
 
 
       
