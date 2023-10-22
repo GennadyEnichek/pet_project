@@ -1,4 +1,20 @@
 
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+  backend "s3" {
+    # Replace this with your bucket name!
+    bucket  = "recipe-s3-gj-481"
+    key     = "recipe_tf/terraform.tfstate"
+    region  = "us-west-1"
+    encrypt = true
+  }
+}
+
 provider "aws" {
   region = "us-west-1"
 }
