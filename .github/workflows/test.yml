@@ -17,6 +17,6 @@ jobs:
           aws-region: us-west-1
           
       - name: Get DNS
-          run:
-            aws describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query 'Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp --output text
+        run:
+          aws describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query 'Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp --output text
             
