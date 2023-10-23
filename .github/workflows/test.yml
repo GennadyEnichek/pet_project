@@ -16,8 +16,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: us-west-1
           
-      - name: Get DNS
+      - name: Get pubip
         run: |
-          dns=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp" --output text)
-          echo "$dns"
+          pubip=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp" --output text)
+          echo "$pubip"
+
+      - name: Deassotiate public IP from MySQL instance
+        run:
+          aws ec2 disassociate-address --public-ip $pubip
             
