@@ -1,0 +1,23 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_app_ifrastructure:
+    runs-on: ubuntu-latest
+    
+    steps:
+ 
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-west-1
+          
+      - name: Get DNS
+          run:
+            aws describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query 'Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp --output text
+            
+          
