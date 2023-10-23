@@ -20,7 +20,8 @@ jobs:
         run: |
           pubid=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].InstanceId" --output text)
           echo "$pubid"
-          aws ec2 associate-address --instance-id $pubid --allocation-id eipalloc-0f4f5a55bf15bdff1
-          aws ec2 disassociate-address --association-id eipalloc-0f4f5a55bf15bdff1
+          allid=$(aws ec2 associate-address --instance-id $pubid --allocation-id eipalloc-0f4f5a55bf15bdff1)
+          echo "$allid"
+          aws ec2 disassociate-address --association-id $allid
 
             
