@@ -18,5 +18,5 @@ jobs:
           
       - name: Get DNS
         run:
-          aws describe-instances --filters "Name=tag:Name,Values=RecipesMySQL"
+          aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query 'Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp --output text
             
