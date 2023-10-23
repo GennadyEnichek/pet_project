@@ -20,6 +20,6 @@ jobs:
         run: |
           pubip=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp" --output text)
           echo "$pubip"
-          aws ec2 disassociate-address --public-ip ${{pubip}}
+          aws ec2 disassociate-address --public-ip $pubip
 
             
