@@ -18,6 +18,6 @@ jobs:
           
       - name: Get DNS
         run: |
-          dns=(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp" --output text)
+          dns=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=RecipesMySQL" Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].NetworkInterfaces[*].Association.PublicIp" --output text)
           echo "$dns"
             
