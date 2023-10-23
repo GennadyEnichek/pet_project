@@ -22,7 +22,7 @@ jobs:
           echo "$pubip"
 
       - name: Deassotiate public IP from MySQL instance
-        run:
+        run: |
           echo "$pubip"
           aws ec2 disassociate-address --public-ip $pubip
             
